@@ -349,7 +349,7 @@ class PatchSysVolume:
                 needs_daemon = True
             InstallAutomaticPatchingServices(self.constants).install_auto_patcher_launch_agent(kdk_caching_needed=needs_daemon)
 
-        self._rebuild_root_volume()
+        #self._rebuild_root_volume()
 
 
     def _execute_patchset(self, required_patches: dict):
@@ -431,12 +431,12 @@ class PatchSysVolume:
                         logging.info(f"- Running Process:\n{process}")
                         subprocess_wrapper.run_and_verify(process, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
 
-        if any(x in required_patches for x in ["AMD Legacy GCN", "AMD Legacy Polaris", "AMD Legacy Vega"]):
-            sys_patch_helpers.SysPatchHelpers(self.constants).disable_window_server_caching()
+        #if any(x in required_patches for x in ["AMD Legacy GCN", "AMD Legacy Polaris", "AMD Legacy Vega"]):
+        #    sys_patch_helpers.SysPatchHelpers(self.constants).disable_window_server_caching()
         if "Metal 3802 Common Extended" in required_patches:
             sys_patch_helpers.SysPatchHelpers(self.constants).patch_gpu_compiler_libraries(mount_point=self.mount_location)
 
-        self._write_patchset(required_patches)
+        #self._write_patchset(required_patches)
 
 
     def _resolve_metallib_support_pkg(self) -> str:
